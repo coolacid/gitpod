@@ -14,8 +14,8 @@ $cmd ||= ( join( " ", @ARGV ) );
 select(STDERR); $|++; select(STDOUT); $|++;
 
 # safety first
-die "need a command\n" unless $cmd;
-die "invalid character $1 in $cmd\n"   if $cmd =~ m(([^-+=:'""'./@ \w]));
+die "I need a command\n" unless $cmd;
+die "Invalid character $1 in $cmd\n"   if $cmd =~ m(([^-+=:'""'./@ \w]));
 die "I don't like .. in $cmd\n"        if $cmd =~ /\.\./;
 die "I don't like leading / in $cmd\n" if $cmd =~ m((^|\s)/);
 die "This is a read only mirror\n"     if $cmd =~ /^git-receive-pack/;
@@ -32,13 +32,13 @@ if ( $cmd eq 'info' ) {
 } elsif ( $cmd =~ /^git-upload-pack (.+)$/ ) {
     upload($1);
 } else {
-    die "unknown command $cmd\n";
+    die "Unknown command $cmd\n";
 }
 
 # ----------------------------------------------------------------------
 
 sub list_repos {
-    print "hello, this is gitpod\n\n";
+    print "This is gitpod\n\nRepos Available:\n";
     system("find . -type d -name '?*.git' | cut -c3- | sed -e 's/\\.git\$//' | sort");
 }
 
