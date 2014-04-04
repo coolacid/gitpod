@@ -18,6 +18,7 @@ die "need a command\n" unless $cmd;
 die "invalid character $1 in $cmd\n"   if $cmd =~ m(([^-+=:'""'./@ \w]));
 die "I don't like .. in $cmd\n"        if $cmd =~ /\.\./;
 die "I don't like leading / in $cmd\n" if $cmd =~ m((^|\s)/);
+die "This is a read only mirror\n"     if $cmd =~ /^git-receive-pack/;
 
 # 5 basic commands
 if ( $cmd eq 'info' ) {
